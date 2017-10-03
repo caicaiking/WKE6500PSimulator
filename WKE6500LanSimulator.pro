@@ -28,14 +28,16 @@ SOURCES += \
         clsMainWindow.cpp \
     clsWK6500MServer.cpp \
     MyThread.cpp \
-    clsWKCommandProcess.cpp
+    clsWKCommandProcess.cpp \
+    clsWK6500P.cpp
 
 HEADERS += \
         clsMainWindow.h \
     clsWK6500MServer.h \
     MyThread.h \
     clsWKCommandProcess.h \
-    singleton.h
+    singleton.h \
+    clsWK6500P.h
 
 FORMS += \
         clsMainWindow.ui

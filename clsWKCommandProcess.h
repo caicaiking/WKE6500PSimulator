@@ -15,7 +15,7 @@ public:
     void setIsRemote(bool value);
 
     typedef void (clsWKCommandProcess::* QUERY_FUNCTION)();
-    typedef void (clsWKCommandProcess::* SET_FUNCTION)(QString);
+    typedef void (clsWKCommandProcess::* SET_FUNCTION)(const QString &);
 
 
 signals:
@@ -26,18 +26,31 @@ public slots:
 
 
     void queryId();
+    void querySWOption();
+    void trig(const QString &empty);
+
+    void queryItem1();
+    void queryItem2();
+    void queryEqucct();
+    void queryRange();
+    void queryFrequency();
+    void queryLevelValue();
+    void queryLevelType();
+    void queryBiasValue();
+    void queryBiasType();
+    void queryBiasStatus();
     void querySpeed();
-    void queryEquCCT();
-    void queryFunc1();
-    void queryFunc2();
 
-    void setSpeed(QString value);
-    void setEqucct(QString value);
-    void setFunc1(QString value);
-    void setFunc2(QString value);
-
-
-
+    void setItem1(const QString &value);
+    void setItem2(const QString &value);
+    void setEqucct(const QString &value);
+    void setRange(const QString &value);
+    void setFrequency(const QString &value);
+    void setLevelValue(const QString &value);
+    void setBiasValue(const QString &value);
+    void setBiasType(const QString &value);
+    void setBiasStatus(const QString &value);
+    void setSpeed(const QString &value);
 
 private:
     QMap<QString, QUERY_FUNCTION> queryFunction;

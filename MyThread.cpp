@@ -44,7 +44,7 @@ void MyThread::disconnected()
 
 void MyThread::write(QString str)
 {
-   str+= "\r\n";
+   str+= "\n";
 
    socket->write(str.toStdString().c_str());
    socket->flush();
