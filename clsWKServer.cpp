@@ -1,13 +1,13 @@
-#include "clsWK6500MServer.h"
+#include "clsWKServer.h"
 #include "MyThread.h"
 #include <QDebug>
 #include "clsWKCommandProcess.h"
-clsWK6500MServer::clsWK6500MServer(QObject *parent) :QTcpServer(parent)
+clsWKServer::clsWKServer(QObject *parent) :QTcpServer(parent)
 {
 
 }
 
-void clsWK6500MServer::startServer()
+void clsWKServer::startServer()
 {
     if(!this->listen(QHostAddress::Any,2000))
     {
@@ -20,7 +20,7 @@ void clsWK6500MServer::startServer()
     }
 }
 
-clsWK6500MServer::~clsWK6500MServer()
+clsWKServer::~clsWKServer()
 {
    QMapIterator <int, MyThread * > it (pool);
 
@@ -30,7 +30,7 @@ clsWK6500MServer::~clsWK6500MServer()
    }
 }
 
-void clsWK6500MServer::incomingConnection(int socketDescriptor)
+void clsWKServer::incomingConnection(int socketDescriptor)
 {
     qDebug()<< socketDescriptor << " comming..." ;
 

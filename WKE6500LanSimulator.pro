@@ -25,19 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        clsMainWindow.cpp \
-    clsWK6500MServer.cpp \
     MyThread.cpp \
     clsWKCommandProcess.cpp \
-    clsWK6500P.cpp
+    clsWK6500P.cpp \
+    ScreenHelper.cpp \
+    frmWK6500PUi.cpp \
+    clsWKServer.cpp
 
 HEADERS += \
-        clsMainWindow.h \
-    clsWK6500MServer.h \
     MyThread.h \
     clsWKCommandProcess.h \
     singleton.h \
-    clsWK6500P.h
+    clsWK6500P.h \
+    ScreenHelper.h \
+    frmWK6500PUi.h \
+    clsWKServer.h
 
 FORMS += \
-        clsMainWindow.ui
+    frmWK6500PUi.ui

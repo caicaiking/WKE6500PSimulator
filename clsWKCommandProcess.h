@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
-#include "clsWK6500MServer.h"
+#include "clsWKServer.h"
 #include "singleton.h"
 #include <QMap>
 

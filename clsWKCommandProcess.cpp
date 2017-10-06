@@ -148,7 +148,7 @@ void clsWKCommandProcess::querySWOption()
     writeToClient(sngWK6500::Instance()->getSWOption());
 }
 
-void clsWKCommandProcess::trig(const QString &empty )
+void clsWKCommandProcess::trig(const QString &/*empty*/ )
 {
     writeToClient(sngWK6500::Instance()->gpibTrig());
 }

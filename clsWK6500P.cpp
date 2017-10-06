@@ -5,17 +5,17 @@ clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
 {
     item1 = "Z";
     item2 = "A";
-    equcct = tr("串连");
-    range = tr("自动");
+    equcct = tr("Series");
+    range = tr("Auto");
     frequency = 1000.0;
     levelAValue = 0.01;
     levelVValue = 1.0;
-    levelType = tr("电压");
+    levelType = tr("Voltage");
     biasAValue = 0.0;
     biasVValue =0.0;
-    biasType = tr("电流");
+    biasType = tr("Current");
     biasONOFF = false;
-    Speed = tr("最快");
+    Speed = tr("Maximum");
 }
 
 QString clsWK6500P::getSWOption() const
@@ -178,7 +178,7 @@ QString clsWK6500P::getGpibItem1() const
     }
     else
     {
-        return tr("查询Item1错误");
+        return tr("Query Item1 Error!");
     }
 
 }
@@ -211,7 +211,7 @@ QString clsWK6500P::getGpibItem2() const
     }
     else
     {
-        return tr("查询Item2错误");
+        return tr("Query Item2 Error");
     }
 }
 
@@ -237,8 +237,8 @@ void clsWK6500P::setGpibItem2(const QString &value)
 QString clsWK6500P::getGpibEqucct() const
 {
     QStringList pars;
-    pars << tr("串联");
-    pars << tr("并联");
+    pars << tr("Series");
+    pars << tr("Parallel");
 
     int index = pars.indexOf(this->equcct);
     if(index >=0)
@@ -247,7 +247,7 @@ QString clsWK6500P::getGpibEqucct() const
     }
     else
     {
-        return tr("查询等效电路错误");
+        return tr("Query Equ-cct Error");
     }
 
 }
@@ -255,8 +255,8 @@ QString clsWK6500P::getGpibEqucct() const
 void clsWK6500P::setGpibEqucct(const QString &value)
 {
     QMap<QString,QString> pars;
-    pars.insert("SER",tr("串联"));
-    pars.insert("PAR",tr("并联"));
+    pars.insert("SER",tr("Series"));
+    pars.insert("PAR",tr("Parallel"));
 
     if(pars.keys().contains(value))
     {
@@ -267,7 +267,7 @@ void clsWK6500P::setGpibEqucct(const QString &value)
 QString clsWK6500P::getGpibRange() const
 {
     QStringList pars;
-    pars << tr("自动");
+    pars << tr("Auto");
     pars << "1";
     pars << "2";
     pars << "3";
@@ -283,7 +283,7 @@ QString clsWK6500P::getGpibRange() const
     }
     else
     {
-        return tr("查询Range错误");
+        return tr("Query Range Error");
     }
 
 }
@@ -291,7 +291,7 @@ QString clsWK6500P::getGpibRange() const
 void clsWK6500P::setGpibRange(const QString &value)
 {
     QMap<QString,QString> pars;
-    pars.insert("AUTO",tr("自动"));
+    pars.insert("AUTO",tr("Auto"));
     pars.insert("1","1");
     pars.insert("2","2");
     pars.insert("3","3");
@@ -323,7 +323,7 @@ void clsWK6500P::setGpibFrequency(const QString &value)
 
 QString clsWK6500P::getGpibLevelValue() const
 {
-    if(this->levelType == tr("电压"))
+    if(this->levelType == tr("Voltage"))
     {
         return QString::number(this->levelVValue,'E',7);
     }
@@ -345,7 +345,7 @@ void clsWK6500P::setGpibLevelValue(const QString &value)
         if(ok)
         {
             setLevelAValue(avalue.toDouble());
-            setLevelType(tr("电流"));
+            setLevelType(tr("Current"));
         }
     }
     else if(value.contains("V"))
@@ -356,7 +356,7 @@ void clsWK6500P::setGpibLevelValue(const QString &value)
         if(ok)
         {
             setLevelVValue(vvalue.toDouble());
-            setLevelType(tr("电压"));
+            setLevelType(tr("Voltage"));
         }
     }
     else
@@ -366,15 +366,15 @@ void clsWK6500P::setGpibLevelValue(const QString &value)
 
         if(ok)
         {
-            if(this->levelType == tr("电压"))
+            if(this->levelType == tr("Voltage"))
             {
                 setLevelVValue(tmpValue.toDouble());
-                setLevelType(tr("电压"));
+                setLevelType(tr("Voltage"));
             }
             else
             {
                 setLevelAValue(tmpValue.toDouble());
-                setLevelType(tr("电流"));
+                setLevelType(tr("Current"));
             }
         }
 
@@ -384,7 +384,7 @@ void clsWK6500P::setGpibLevelValue(const QString &value)
 QString clsWK6500P::getGpibLevelType() const
 {
     QStringList pars;
-    pars << tr("电压") << tr("电流");
+    pars << tr("Voltage") << tr("Current");
 
     int index  = pars.indexOf(this->levelType);
 
@@ -394,13 +394,13 @@ QString clsWK6500P::getGpibLevelType() const
     }
     else
     {
-        return tr("查询LevelType错误");
+        return tr("Query LevelType Error");
     }
 }
 
 QString clsWK6500P::getGpibBiasValue() const
 {
-    if(biasType == tr("电压"))
+    if(biasType == tr("Voltage"))
     {
         return QString::number(biasVValue,'E',7);
     }
@@ -417,7 +417,7 @@ void clsWK6500P::setGpibBiasValue(const QString &value)
 
     if(ok)
     {
-        if(biasType == tr("电压"))
+        if(biasType == tr("Voltage"))
         {
             setBiasVValue(value.toDouble());
         }
@@ -431,7 +431,7 @@ void clsWK6500P::setGpibBiasValue(const QString &value)
 QString clsWK6500P::getGpibBiasType() const
 {
     QStringList pars;
-    pars<<tr("电流")<< tr("电压");
+    pars<<tr("Current")<< tr("Voltage");
     int index = pars.indexOf(this->biasType);
 
     if(index >=0)
@@ -440,7 +440,7 @@ QString clsWK6500P::getGpibBiasType() const
     }
     else
     {
-        return tr("查询Bias 类型错误");
+        return tr("Query Bias Type Error");
     }
 }
 
@@ -448,11 +448,11 @@ void clsWK6500P::setGpibBiasType(const QString &value)
 {
     if(value == "VOL")
     {
-        this->setBiasType(tr("电压"));
+        this->setBiasType(tr("Voltage"));
     }
     else if(value == "CUR")
     {
-        this->setBiasType(tr("电流"));
+        this->setBiasType(tr("Current"));
     }
     else
     {
@@ -486,22 +486,22 @@ void clsWK6500P::setGpibBiasONOFF(const QString &value)
 
 QString clsWK6500P::getGpibSpeed() const
 {
-    if(this->Speed==tr("最快"))
+    if(this->Speed==tr("Maximum"))
     {
         return QString::number(-4);
     }
 
-    if(this->Speed == tr("快速"))
+    if(this->Speed == tr("Fast"))
     {
         return QString::number(-3);
     }
 
-    if(this->Speed == tr("中速"))
+    if(this->Speed == tr("Medium"))
     {
         return QString::number(-2);
     }
 
-    if (this->Speed == tr("慢速"))
+    if (this->Speed == tr("Slow"))
     {
         return QString::number(-1);
     }
@@ -514,19 +514,19 @@ void clsWK6500P::setGpibSpeed(const QString &value)
     QString tmpSpeed="";
     if(QString("MAXimum").contains(value))
     {
-        tmpSpeed =tr("最快");
+        tmpSpeed =tr("Maximum");
     }
     else if(QString("FAST").contains(value))
     {
-        tmpSpeed = tr("快速");
+        tmpSpeed = tr("Fast");
     }
     else if(QString("MEDium").contains(value))
     {
-        tmpSpeed = tr("中速");
+        tmpSpeed = tr("Medium");
     }
     else if(QString("SLOW").contains(value))
     {
-        tmpSpeed = tr("慢速");
+        tmpSpeed = tr("Slow");
     }
     else
     {

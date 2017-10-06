@@ -3,13 +3,13 @@
 #include "MyThread.h"
 #include <QTcpServer>
 #include <QList>
-class clsWK6500MServer : public QTcpServer
+class clsWKServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit  clsWK6500MServer(QObject *parent=0);
+    explicit  clsWKServer(QObject *parent=0);
     void startServer();
-    ~clsWK6500MServer();
+    ~clsWKServer();
 
 protected:
     void incomingConnection(int socketDescriptor);
