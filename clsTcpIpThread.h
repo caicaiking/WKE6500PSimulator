@@ -5,11 +5,11 @@
 #include <QThread>
 #include <QTcpSocket>
 #include <QDebug>
-class MyThread : public QThread
+class clsTcpIpThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit MyThread(int Id,QObject *parent=0);
+    explicit clsTcpIpThread(int Id,QObject *parent=0);
 
     void run();
     int getSocketDescriptor() const;

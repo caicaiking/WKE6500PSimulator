@@ -1,12 +1,12 @@
-#include "MyThread.h"
+#include "clsTcpIpThread.h"
 
-MyThread::MyThread(int Id, QObject *parent):
+clsTcpIpThread::clsTcpIpThread(int Id, QObject *parent):
         QThread(parent)
 {
    this->socketDescriptor = Id;
 }
 
-void MyThread::run()
+void clsTcpIpThread::run()
 {
     qDebug()<<this->socketDescriptor<< " " "Starting thread";
 
@@ -25,24 +25,27 @@ void MyThread::run()
     exec();
 }
 
-void MyThread::readRead()
+void clsTcpIpThread::readRead()
 {
    QByteArray data = socket->readAll();
 
-   if(data.contains("\r\n"))
+   if(data.contains("\r\n")|| data.contains("\n"))
    {
-       emit getCommand(data.remove(data.length()-2,2));
+       QString tmpData = QString(data);
+       tmpData = tmpData.remove("\r");
+       tmpData = tmpData.remove("\n");
+       emit getCommand(tmpData);
    }
 }
 
-void MyThread::disconnected()
+void clsTcpIpThread::disconnected()
 {
     qDebug()<< socketDescriptor << " disconnected";
     socket->deleteLater();
     exit(0);
 }
 
-void MyThread::write(QString str)
+void clsTcpIpThread::write(QString str)
 {
    str+= "\n";
 
@@ -50,7 +53,7 @@ void MyThread::write(QString str)
    socket->flush();
 }
 
-int MyThread::getSocketDescriptor() const
+int clsTcpIpThread::getSocketDescriptor() const
 {
     return socketDescriptor;
 }

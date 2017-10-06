@@ -1,6 +1,6 @@
 #ifndef CLSWK6500MSERVER_H
 #define CLSWK6500MSERVER_H
-#include "MyThread.h"
+#include "clsTcpIpThread.h"
 #include <QTcpServer>
 #include <QList>
 class clsWKServer : public QTcpServer
@@ -18,7 +18,7 @@ signals:
 public slots:
 
 private:
-    QMap<int, MyThread *> pool;
+    QMap<int, clsTcpIpThread *> pool;
 };
 
 #endif // CLSWK6500MSERVER_H

@@ -1,5 +1,5 @@
 #include "clsWKServer.h"
-#include "MyThread.h"
+#include "clsTcpIpThread.h"
 #include <QDebug>
 #include "clsWKCommandProcess.h"
 clsWKServer::clsWKServer(QObject *parent) :QTcpServer(parent)
@@ -22,7 +22,7 @@ void clsWKServer::startServer()
 
 clsWKServer::~clsWKServer()
 {
-   QMapIterator <int, MyThread * > it (pool);
+   QMapIterator <int, clsTcpIpThread * > it (pool);
 
    while(it.hasNext())
    {
@@ -34,14 +34,14 @@ void clsWKServer::incomingConnection(int socketDescriptor)
 {
     qDebug()<< socketDescriptor << " comming..." ;
 
-    MyThread * thread  = new MyThread(socketDescriptor,this);
+    clsTcpIpThread * thread  = new clsTcpIpThread(socketDescriptor,this);
     pool.insert(socketDescriptor, thread);
 
     emit lanRemote(true);
     connect(thread,SIGNAL(getCommand(QString)),sngWkCommandProcess::Instance(),SLOT(setGpibCommand(QString)));
     connect(sngWkCommandProcess::Instance(),SIGNAL(writeToClient(QString)),thread,SLOT(write(QString)));
 
-    connect(thread,&MyThread::destroyed,[=]{
+    connect(thread,&clsTcpIpThread::destroyed,[=]{
 
         int id = thread->getSocketDescriptor();
         pool.remove(id);
@@ -49,7 +49,7 @@ void clsWKServer::incomingConnection(int socketDescriptor)
     });
     connect (thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
 
-    connect(thread,&MyThread::finished,[=]()
+    connect(thread,&clsTcpIpThread::finished,[=]()
     {
         qDebug()<< socketDescriptor << " Lan remote off";
         emit lanRemote(false);
