@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WKE6500LanSimulator
 TEMPLATE = app
+INCLUDEPATH += Public Server Utilities UserInterface
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -23,23 +24,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += \
-        main.cpp \
-    clsWKCommandProcess.cpp \
-    clsWK6500P.cpp \
-    ScreenHelper.cpp \
-    frmWK6500PUi.cpp \
-    clsWKServer.cpp \
-    clsTcpIpThread.cpp
+ 
 
 HEADERS += \
-    clsWKCommandProcess.h \
-    singleton.h \
-    clsWK6500P.h \
-    ScreenHelper.h \
-    frmWK6500PUi.h \
-    clsWKServer.h \
-    clsTcpIpThread.h
+    Public/ScreenHelper.h \
+    Server/clsTcpIpThread.h \
+    Server/clsWKServer.h \
+    UserInterface/frmWK6500PUi.h \
+    Utilities/clsWK6500P.h \
+    Utilities/clsWKCommandProcess.h \
+    Public/singleton.h
+
+SOURCES += \
+    Public/main.cpp \
+    Public/ScreenHelper.cpp \
+    Server/clsTcpIpThread.cpp \
+    Server/clsWKServer.cpp \
+    UserInterface/frmWK6500PUi.cpp \
+    Utilities/clsWK6500P.cpp \
+    Utilities/clsWKCommandProcess.cpp
 
 FORMS += \
-    frmWK6500PUi.ui
+    UserInterface/frmWK6500PUi.ui

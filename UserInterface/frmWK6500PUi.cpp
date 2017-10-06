@@ -6,7 +6,7 @@
 frmWK6500PUi::frmWK6500PUi(QWidget *parent): QDialog(parent)
 {
     this->setupUi(this);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMaximizeButtonHint | Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMaximizeButtonHint);
     reSetupUi(this->children());
 
     btnTrig->setFocus();
