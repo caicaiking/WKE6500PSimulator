@@ -55,6 +55,7 @@ public slots:
 private:
     QMap<QString, QUERY_FUNCTION> queryFunction;
     QMap<QString, SET_FUNCTION> setFunction;
+    int lastCmmdType;
 };
 
 typedef Singleton < clsWKCommandProcess> sngWkCommandProcess;

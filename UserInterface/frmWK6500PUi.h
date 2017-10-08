@@ -25,6 +25,27 @@ private slots:
 
     void on_btnItem2_clicked();
 
+    void on_btnEqucct_clicked();
+
+    void on_btnSpeed_clicked();
+
+    void on_btnFrequency_clicked();
+
+    void on_btnLevel_clicked();
+
+    void on_btnRange_clicked();
+
+    void on_btnBiasValue_clicked();
+
+    void on_btnBiasType_clicked();
+
+    void on_btnBiasStatus_clicked();
+
+    void on_btnRepeat_clicked();
+
+    void on_btnTrig_clicked();
+private slots:
+    void connectSlots();
 private:
     bool mMoving;
     QPoint mMovePosition;

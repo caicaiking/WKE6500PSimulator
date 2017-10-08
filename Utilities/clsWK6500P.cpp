@@ -1,6 +1,6 @@
 #include <QMap>
 #include "clsWK6500P.h"
-
+#include "clsWKCommandProcess.h"
 clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
 {
     item1 = "Z";
@@ -16,6 +16,8 @@ clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
     biasType = tr("Current");
     biasONOFF = false;
     Speed = tr("Maximum");
+
+    connect(sngWkCommandProcess::Instance(),SIGNAL(lanRemote(bool)),this,SLOT(setLanRemote(bool)));
 }
 
 QString clsWK6500P::getSWOption() const
@@ -46,6 +48,7 @@ QString clsWK6500P::getItem1() const
 void clsWK6500P::setItem1(const QString &value)
 {
     item1 = value;
+    emit sgnSetItem1(item1);
 }
 
 QString clsWK6500P::getItem2() const
@@ -56,6 +59,7 @@ QString clsWK6500P::getItem2() const
 void clsWK6500P::setItem2(const QString &value)
 {
     item2 = value;
+    emit sgnSetItem2(item2);
 }
 
 QString clsWK6500P::getEqucct() const
@@ -66,6 +70,7 @@ QString clsWK6500P::getEqucct() const
 void clsWK6500P::setEqucct(const QString &value)
 {
     equcct = value;
+    emit sgnSetEqucct(equcct);
 }
 
 QString clsWK6500P::getRange() const
@@ -76,7 +81,10 @@ QString clsWK6500P::getRange() const
 void clsWK6500P::setRange(const QString &value)
 {
     range = value;
+
+    emit sgnSetRange(range);
 }
+
 
 double clsWK6500P::getFrequency() const
 {
@@ -86,6 +94,12 @@ double clsWK6500P::getFrequency() const
 void clsWK6500P::setFrequency(double value)
 {
     frequency = value;
+    if(frequency < 20.0)
+        frequency = 20.0;
+    if(frequency> 1.2E8)
+        frequency = 1.2E8;
+
+    emit sgnSetFrequency(frequency);
 }
 
 double clsWK6500P::getLevelAValue() const
@@ -96,6 +110,10 @@ double clsWK6500P::getLevelAValue() const
 void clsWK6500P::setLevelAValue(double value)
 {
     levelAValue = value;
+
+    levelAValue=(levelAValue<200.0E-6?200.0E-6:levelAValue);
+    levelAValue=(levelAValue>20.0E-3?20.0E-3:levelAValue);
+    emit sgnSetLevelValue(levelAValue);
 }
 
 double clsWK6500P::getLevelVValue() const
@@ -106,6 +124,10 @@ double clsWK6500P::getLevelVValue() const
 void clsWK6500P::setLevelVValue(double value)
 {
     levelVValue = value;
+    levelVValue = (levelVValue < 10.0E-3? 10.0E-3:levelVValue);
+    levelVValue = (levelVValue > 1.0? 1.0:levelVValue);
+
+    emit sgnSetLevelValue(levelAValue);
 }
 
 QString clsWK6500P::getLevelType() const
@@ -116,6 +138,7 @@ QString clsWK6500P::getLevelType() const
 void clsWK6500P::setLevelType(const QString &value)
 {
     levelType = value;
+    emit sgnSetLevelType(levelType);
 }
 
 double clsWK6500P::getBiasAValue() const
@@ -126,6 +149,9 @@ double clsWK6500P::getBiasAValue() const
 void clsWK6500P::setBiasAValue(double value)
 {
     biasAValue = value;
+    biasAValue = (biasAValue > 40.0? 40.0:biasAValue);
+    biasAValue = (biasAValue < 0.0? 0.0:biasAValue);
+    emit sgnSetBiasValue(biasAValue);
 }
 
 double clsWK6500P::getBiasVValue() const
@@ -136,6 +162,9 @@ double clsWK6500P::getBiasVValue() const
 void clsWK6500P::setBiasVValue(double value)
 {
     biasVValue = value;
+    biasVValue = (biasVValue > 40.0? 40.0:biasVValue);
+    biasVValue = (biasVValue < -40.0? -40.0:biasVValue);
+    emit sgnSetBiasValue(biasVValue);
 }
 
 QString clsWK6500P::getBiasType() const
@@ -146,6 +175,7 @@ QString clsWK6500P::getBiasType() const
 void clsWK6500P::setBiasType(const QString &value)
 {
     biasType = value;
+    emit sgnSetBiasType(biasType);
 }
 
 bool clsWK6500P::getBiasONOFF() const
@@ -156,6 +186,7 @@ bool clsWK6500P::getBiasONOFF() const
 void clsWK6500P::setBiasONOFF(bool value)
 {
     biasONOFF = value;
+    emit sgnSetBiasStatus(biasONOFF);
 }
 
 QString clsWK6500P::getSpeed() const
@@ -166,6 +197,7 @@ QString clsWK6500P::getSpeed() const
 void clsWK6500P::setSpeed(const QString &value)
 {
     Speed = value;
+    emit sgnSetSpeed(Speed);
 }
 
 QString clsWK6500P::getGpibItem1() const
@@ -546,4 +578,9 @@ void clsWK6500P::setGpibSpeed(const QString &value)
 QString clsWK6500P::gpibTrig()
 {
     return "1E2,3.00E3";
+}
+
+void clsWK6500P::setLanRemote(bool value)
+{
+    emit sgnSetLanRemote(value);
 }

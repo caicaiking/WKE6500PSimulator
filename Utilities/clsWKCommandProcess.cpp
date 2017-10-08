@@ -31,6 +31,7 @@ clsWKCommandProcess::clsWKCommandProcess(QObject *parent) : QObject(parent)
     setFunction.insert("BIAS-STAT",this->setBiasStatus);
     setFunction.insert("SPEED",this->setSpeed);
     setFunction.insert("TRIG",this->trig);
+    this->lastCmmdType =0;
 }
 
 void clsWKCommandProcess::setIsRemote(bool value) {
@@ -45,7 +46,7 @@ void clsWKCommandProcess::setGpibCommand(QString str)
     QStringList cmdList = str.split(";",QString::SkipEmptyParts); //将指令分开用;，并且省略了空白部分。
 
     QListIterator<QString> it(cmdList);
-
+    lastCmmdType=0;
     while(it.hasNext())
     {
         QString tmpStr = it.next();
@@ -54,6 +55,7 @@ void clsWKCommandProcess::setGpibCommand(QString str)
         {
             if(str.contains("?")) //查询指令开始
             {
+                lastCmmdType =2;
                 QStringList modes= str.split(":",QString::SkipEmptyParts);
                 if(modes.length()==1 && queryFunction.keys().contains(modes.at(0)))//通用的IEE488指令查询
                 {
@@ -78,6 +80,7 @@ void clsWKCommandProcess::setGpibCommand(QString str)
             }
             else //设置指令开始
             {
+                lastCmmdType =1;
                 QStringList pars = tmpStr.split(" ",QString::SkipEmptyParts);
 
                 if(pars.length()==1) //没有参数的设置指令 :METER:TRIG
@@ -136,6 +139,9 @@ void clsWKCommandProcess::setGpibCommand(QString str)
             }
         }
     }
+
+    if(this->lastCmmdType == 1)
+        writeToClient("");
 }
 
 void clsWKCommandProcess::queryId()
@@ -150,6 +156,7 @@ void clsWKCommandProcess::querySWOption()
 
 void clsWKCommandProcess::trig(const QString &/*empty*/ )
 {
+    this->lastCmmdType = 2;
     writeToClient(sngWK6500::Instance()->gpibTrig());
 }
 
@@ -212,60 +219,50 @@ void clsWKCommandProcess::querySpeed()
 void clsWKCommandProcess::setItem1(const QString &value)
 {
     sngWK6500::Instance()->setGpibItem1(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setItem2(const QString &value)
 {
     sngWK6500::Instance()->setGpibItem2(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setEqucct(const QString &value)
 {
     sngWK6500::Instance()->setGpibEqucct(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setRange(const QString &value)
 {
     sngWK6500::Instance()->setGpibRange(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setFrequency(const QString &value)
 {
     sngWK6500::Instance()->setGpibFrequency(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setLevelValue(const QString &value)
 {
     sngWK6500::Instance()->setGpibLevelValue(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setBiasValue(const QString &value)
 {
     sngWK6500::Instance()->setGpibBiasValue(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setBiasType(const QString &value)
 {
     sngWK6500::Instance()->setGpibBiasType(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setBiasStatus(const QString &value)
 {
     sngWK6500::Instance()->setGpibBiasONOFF(value);
-    writeToClient("");
 }
 
 void clsWKCommandProcess::setSpeed(const QString &value)
 {
     sngWK6500::Instance()->setGpibSpeed(value);
-    writeToClient("");
 }
 

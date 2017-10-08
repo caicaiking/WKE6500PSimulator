@@ -208,7 +208,7 @@
 Scale</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnSaveNom2">
+  <widget class="QPushButton" name="btnSaveNorm2">
    <property name="geometry">
     <rect>
      <x>224</x>
@@ -228,7 +228,7 @@ Scale</string>
 Nom2</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnSaveNorm2">
+  <widget class="QPushButton" name="btnSaveNorm1">
    <property name="geometry">
     <rect>
      <x>187</x>
@@ -808,7 +808,7 @@ Search</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>60</y>
+      <y>80</y>
       <width>351</width>
       <height>61</height>
      </rect>
@@ -830,7 +830,7 @@ Search</string>
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>140</y>
+      <y>160</y>
       <width>351</width>
       <height>61</height>
      </rect>
@@ -847,6 +847,104 @@ Search</string>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
+   </widget>
+   <widget class="QWidget" name="wgdBiasON" native="true">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>361</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../Res/WKRes.qrc">:/BiasOn.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>45</x>
+       <y>10</y>
+       <width>271</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+background-color: rgb(255, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string> Warning: DC Bias on</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>10</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../Res/WKRes.qrc">:/BiasOn.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QLabel" name="txtMessage">
@@ -873,14 +971,58 @@ Search</string>
     <string/>
    </property>
   </widget>
+  <widget class="QWidget" name="wgdLanRemote" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>480</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="lblLanRemote">
+    <property name="geometry">
+     <rect>
+      <x>535</x>
+      <y>3</y>
+      <width>101</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(85, 0, 255);</string>
+    </property>
+    <property name="text">
+     <string>Lan Remote</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <zorder>wgdLanRemote</zorder>
+  <zorder>wgtMenuBackground</zorder>
+  <zorder>line</zorder>
+  <zorder>btnShowScale</zorder>
+  <zorder>btnSaveNorm2</zorder>
+  <zorder>btnSaveNorm1</zorder>
+  <zorder>btnResSearch</zorder>
+  <zorder>btnQuit</zorder>
+  <zorder>frmMain</zorder>
+  <zorder>txtMessage</zorder>
  </widget>
  <tabstops>
   <tabstop>btnFileMenu</tabstop>
   <tabstop>btnModeMenu</tabstop>
   <tabstop>btnDisplayMenu</tabstop>
   <tabstop>btnShowScale</tabstop>
+  <tabstop>btnSaveNorm1</tabstop>
   <tabstop>btnSaveNorm2</tabstop>
-  <tabstop>btnSaveNom2</tabstop>
   <tabstop>btnResSearch</tabstop>
   <tabstop>btnQuit</tabstop>
   <tabstop>btnItem1</tabstop>
@@ -896,6 +1038,8 @@ Search</string>
   <tabstop>btnRepeat</tabstop>
   <tabstop>btnTrig</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../Res/WKRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

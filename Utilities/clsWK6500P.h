@@ -88,8 +88,24 @@ public:
 
     QString gpibTrig();
 
-signals:
+public slots:
+    void setLanRemote(bool value);
 
+
+signals:
+    void sgnSetItem1(QString);
+    void sgnSetItem2(QString);
+    void sgnSetEqucct(QString);
+    void sgnSetSpeed(QString);
+    void sgnSetFrequency(double);
+    void sgnSetLevelType(QString);
+    void sgnSetLevelValue(double);
+    void sgnSetRange(QString);
+    void sgnSetBiasValue(double);
+    void sgnSetBiasStatus(bool value);
+    void sgnSetBiasType(QString);
+
+    void sgnSetLanRemote(bool value);
 public slots:
 private:
     QString item1;

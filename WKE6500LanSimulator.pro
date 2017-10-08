@@ -33,7 +33,8 @@ HEADERS += \
     UserInterface/frmWK6500PUi.h \
     Utilities/clsWK6500P.h \
     Utilities/clsWKCommandProcess.h \
-    Public/singleton.h
+    Public/singleton.h \
+    Public/doubleType.h
 
 SOURCES += \
     Public/main.cpp \
@@ -42,7 +43,11 @@ SOURCES += \
     Server/clsWKServer.cpp \
     UserInterface/frmWK6500PUi.cpp \
     Utilities/clsWK6500P.cpp \
-    Utilities/clsWKCommandProcess.cpp
+    Utilities/clsWKCommandProcess.cpp \
+    Public/doubleType.cpp
 
 FORMS += \
     UserInterface/frmWK6500PUi.ui
+
+RESOURCES += \
+    Res/WKRes.qrc
