@@ -1,10 +1,13 @@
 #include <QMap>
+#include "clsComplexOp.h"
+#include "clsUserFunction.h"
+#include "doubleType.h"
 #include "clsWK6500P.h"
 #include "clsWKCommandProcess.h"
 clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
 {
     item1 = "Z";
-    item2 = "A";
+    item2 = "θ";
     equcct = tr("Series");
     range = tr("Auto");
     frequency = 1000.0;
@@ -16,6 +19,10 @@ clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
     biasType = tr("Current");
     biasONOFF = false;
     Speed = tr("Maximum");
+
+    isUpdate = true;
+    z=1000;
+    a=1;
 
     connect(sngWkCommandProcess::Instance(),SIGNAL(lanRemote(bool)),this,SLOT(setLanRemote(bool)));
 }
@@ -48,6 +55,7 @@ QString clsWK6500P::getItem1() const
 void clsWK6500P::setItem1(const QString &value)
 {
     item1 = value;
+    this->getParRes();
     emit sgnSetItem1(item1);
 }
 
@@ -59,6 +67,7 @@ QString clsWK6500P::getItem2() const
 void clsWK6500P::setItem2(const QString &value)
 {
     item2 = value;
+    this->getParRes();
     emit sgnSetItem2(item2);
 }
 
@@ -69,7 +78,11 @@ QString clsWK6500P::getEqucct() const
 
 void clsWK6500P::setEqucct(const QString &value)
 {
+    if(equcct == value)
+        return;
     equcct = value;
+    a=-a;
+    this->getParRes();
     emit sgnSetEqucct(equcct);
 }
 
@@ -127,7 +140,7 @@ void clsWK6500P::setLevelVValue(double value)
     levelVValue = (levelVValue < 10.0E-3? 10.0E-3:levelVValue);
     levelVValue = (levelVValue > 1.0? 1.0:levelVValue);
 
-    emit sgnSetLevelValue(levelAValue);
+    emit sgnSetLevelValue(levelVValue);
 }
 
 QString clsWK6500P::getLevelType() const
@@ -575,9 +588,42 @@ void clsWK6500P::setGpibSpeed(const QString &value)
         setSpeed(tmpSpeed);
 }
 
+void clsWK6500P::getParRes()
+{
+    clsComplexOp *op = new clsComplexOp(z,a,frequency,(equcct==tr("Series")? series: parallel));
+    op->CalaculateParameters();
+
+    double it1,it2;
+    it1 = op->getPar(item1);
+    it2 = op->getPar(item2);
+
+    QString unit1,unit2;
+    unit1 = clsUserFunction::getSuffix(item1);
+    unit2 = clsUserFunction::getSuffix(item2);
+    QString suffix;
+    doubleType dt;
+    dt.setData(it1);
+    suffix = dt.getUnit();
+    if(isUpdate)
+        emit sgnItem1Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit1);
+    dt.setData(it2);
+    suffix = dt.getUnit();
+    if(isUpdate)
+        emit sgnItem2Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit2);
+}
+
 QString clsWK6500P::gpibTrig()
 {
-    return "1E2,3.00E3";
+    if(z<=1E6)
+        z=z*((qrand()%100)*1.0/1000.0+1);
+    else
+        z=z*(-(qrand()%100)*1.0/1000.0+1);
+    a= a*((qrand()%10)*1.0/1000.0+1.0);
+    if(a>=90.0)
+        a=90.0-(a-90.0);
+    getParRes();
+
+    return QString::number(z,'E',7) +","+QString::number(a,'E',7);
 }
 
 void clsWK6500P::setLanRemote(bool value)

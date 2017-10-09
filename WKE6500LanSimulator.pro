@@ -34,7 +34,14 @@ HEADERS += \
     Utilities/clsWK6500P.h \
     Utilities/clsWKCommandProcess.h \
     Public/singleton.h \
-    Public/doubleType.h
+    Public/doubleType.h \
+    UserInterface/wk6500LevelInputBox.h \
+    UserInterface/wk6500Range.h \
+    UserInterface/wk6500Speed.h \
+    UserInterface/NumberInput.h \
+    UserInterface/wk6500Function.h \
+    Public/clsComplexOp.h \
+    Public/clsUserFunction.h
 
 SOURCES += \
     Public/main.cpp \
@@ -44,10 +51,24 @@ SOURCES += \
     UserInterface/frmWK6500PUi.cpp \
     Utilities/clsWK6500P.cpp \
     Utilities/clsWKCommandProcess.cpp \
-    Public/doubleType.cpp
+    Public/doubleType.cpp \
+    UserInterface/wk6500LevelInputBox.cpp \
+    UserInterface/wk6500Range.cpp \
+    UserInterface/wk6500Speed.cpp \
+    UserInterface/NumberInput.cpp \
+    UserInterface/wk6500Function.cpp \
+    Public/clsComplexOp.cpp \
+    Public/clsUserFunction.cpp
 
 FORMS += \
-    UserInterface/frmWK6500PUi.ui
+    UserInterface/frmWK6500PUi.ui \
+    UserInterface/wk6500LevelInputBox.ui \
+    UserInterface/wk6500Range.ui \
+    UserInterface/wk6500Speed.ui \
+    UserInterface/NumberInput.ui \
+    UserInterface/wk6500Function.ui
 
 RESOURCES += \
     Res/WKRes.qrc
+
+RC_FILE  =Icon.rc

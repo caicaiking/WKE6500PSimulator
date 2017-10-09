@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Wayne Kerr 65120P Simulator</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog#frmWK6500PUi{
@@ -904,11 +904,11 @@ Search</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: white;
-background-color: rgb(255, 0, 0);</string>
+      <string notr="true">background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string> Warning: DC Bias on</string>
+      <string>Bias on - Safety Hazard</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

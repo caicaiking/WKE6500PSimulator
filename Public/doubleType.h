@@ -34,6 +34,8 @@ public:
     double Data();
     //如 传入数据位 10000， Unit =k 则返回值位10
     double getDataWithUnit(QString unit="");
+    QString getUnit() const;
+
 private:
     void initUnitMap();
     int Abs(double &value);

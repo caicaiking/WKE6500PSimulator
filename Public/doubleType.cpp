@@ -84,6 +84,11 @@ double doubleType::getData(const double orgValue, const QString orgUnit)
     return this->value;
 }
 
+QString doubleType::getUnit() const
+{
+    return unit;
+}
+
 double doubleType::Data()
 {
     double exValue= this->value;

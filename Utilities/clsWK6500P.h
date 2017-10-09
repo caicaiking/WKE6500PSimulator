@@ -104,6 +104,8 @@ signals:
     void sgnSetBiasValue(double);
     void sgnSetBiasStatus(bool value);
     void sgnSetBiasType(QString);
+    void sgnItem1Res(QString);
+    void sgnItem2Res(QString);
 
     void sgnSetLanRemote(bool value);
 public slots:
@@ -121,6 +123,10 @@ private:
     QString biasType;
     bool biasONOFF;
     QString Speed;
+
+    double z,a;
+    bool isUpdate;
+    void getParRes();
 };
 
 typedef Singleton <clsWK6500P> sngWK6500;
