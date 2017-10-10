@@ -141,7 +141,7 @@ void clsWKCommandProcess::setGpibCommand(QString str)
     }
 
     if(this->lastCmmdType == 1)
-        writeToClient("");
+        writeToClient(" ");
 }
 
 void clsWKCommandProcess::queryId()

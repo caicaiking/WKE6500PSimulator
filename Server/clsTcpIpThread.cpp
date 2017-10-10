@@ -1,9 +1,9 @@
 #include "clsTcpIpThread.h"
 
 clsTcpIpThread::clsTcpIpThread(int Id, QObject *parent):
-        QThread(parent)
+    QThread(parent)
 {
-   this->socketDescriptor = Id;
+    this->socketDescriptor = Id;
 }
 
 void clsTcpIpThread::run()
@@ -27,15 +27,14 @@ void clsTcpIpThread::run()
 
 void clsTcpIpThread::readRead()
 {
-   QByteArray data = socket->readAll();
+    QByteArray data = socket->readAll();
+    if(data.length() <= 0)
+        return ;
 
-   if(data.contains("\r\n")|| data.contains("\n"))
-   {
-       QString tmpData = QString(data);
-       tmpData = tmpData.remove("\r");
-       tmpData = tmpData.remove("\n");
-       emit getCommand(tmpData);
-   }
+    QString tmpData = QString(data);
+    tmpData = tmpData.remove("\r");
+    tmpData = tmpData.remove("\n");
+    emit getCommand(tmpData);
 }
 
 void clsTcpIpThread::disconnected()
@@ -47,10 +46,8 @@ void clsTcpIpThread::disconnected()
 
 void clsTcpIpThread::write(QString str)
 {
-   str+= "\n";
-
-   socket->write(str.toStdString().c_str());
-   socket->flush();
+    socket->write(str.toStdString().c_str());
+    socket->flush();
 }
 
 int clsTcpIpThread::getSocketDescriptor() const
