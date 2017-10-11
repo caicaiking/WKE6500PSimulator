@@ -54,6 +54,7 @@ public slots:
     void setBiasType(const QString &value);
     void setBiasStatus(const QString &value);
     void setSpeed(const QString &value);
+    void setFastGpib(const QString &value);
 
 private:
     QMap<QString, QUERY_FUNCTION> queryFunction;

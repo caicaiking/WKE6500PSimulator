@@ -34,6 +34,7 @@ clsWKCommandProcess::clsWKCommandProcess(QObject *parent) : QObject(parent)
     setFunction.insert("BIAS-TYPE",this->setBiasType);
     setFunction.insert("BIAS-STAT",this->setBiasStatus);
     setFunction.insert("SPEED",this->setSpeed);
+    setFunction.insert("FAST-GPIB",this->setFastGpib);
     setFunction.insert("TRIG",this->trig);
     this->lastCmmdType =0;
 }
@@ -287,5 +288,10 @@ void clsWKCommandProcess::setBiasStatus(const QString &value)
 void clsWKCommandProcess::setSpeed(const QString &value)
 {
     sngWK6500::Instance()->setGpibSpeed(value);
+}
+
+void clsWKCommandProcess::setFastGpib(const QString &value)
+{
+   sngWK6500::Instance()->setGpibFastGpib(value);
 }
 

@@ -24,6 +24,7 @@ frmWK6500PUi::frmWK6500PUi(QWidget *parent): QDialog(parent)
     wgdBiasON->setVisible(false);
     btnTrig->setFocus();
 
+
     connectSlots();
 
 }
@@ -245,7 +246,7 @@ void frmWK6500PUi::on_btnLevel_clicked()
         doubleType dt;
         dt.setData(value,suffix);
 
-        sngWK6500::Instance()->setLevelType(unit);
+        sngWK6500::Instance()->setLevelType((unit=="V"?tr("Voltage"):tr("Current")));
 
         if(unit=="V")
         {
@@ -340,6 +341,10 @@ void frmWK6500PUi::on_btnTrig_clicked()
 
 void frmWK6500PUi::connectSlots()
 {
+    connect(sngWK6500::Instance(),&clsWK6500P::showMessage,[=](QString value){
+        txtMessage->setText(value);
+    });
+
     connect(sngWK6500::Instance(),&clsWK6500P::sgnSetLanRemote,[=](bool vis){
         wgdLanRemote->setVisible(vis);
         lblLanRemote->setVisible(vis);

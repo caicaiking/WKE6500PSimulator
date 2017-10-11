@@ -88,6 +88,8 @@ public:
 
     QString gpibTrig();
 
+    void setGpibFastGpib(const QString &value);
+
 public slots:
     void setLanRemote(bool value);
 
@@ -108,6 +110,7 @@ signals:
     void sgnItem2Res(QString);
 
     void sgnSetLanRemote(bool value);
+    void showMessage(QString);
 public slots:
 private:
     QString item1;

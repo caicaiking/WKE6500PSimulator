@@ -621,23 +621,27 @@ void clsWK6500P::getParRes()
     dt.setData(it1);
     suffix = dt.getUnit();
     if(isUpdate)
-        emit sgnItem1Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit1);
+    {
+        if(!QString("QD").contains(item1))
+            emit sgnItem1Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit1);
+        else
+            emit sgnItem1Res(dt.formateWithUnit("",7)+"  "+unit1);
+
+    }
     dt.setData(it2);
     suffix = dt.getUnit();
     if(isUpdate)
-        emit sgnItem2Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit2);
+    {
+        if(!QString("QD").contains(item2))
+            emit sgnItem2Res(dt.formateToString(7)+(suffix==""?"  ":"")+unit2);
+        else
+            emit sgnItem2Res(dt.formateWithUnit("",7)+"  "+unit2);
+
+    }
 }
 
 QString clsWK6500P::gpibTrig()
 {
-    /* if(z<=1E6)
-        z=z*((qrand()%100)*1.0/1000.0+1);
-    else
-        z=z*(-(qrand()%100)*1.0/1000.0+1);
-    a= a*((qrand()%10)*1.0/1000.0+1.0);
-    if(a>=90.0)
-        a=90.0-(a-90.0);
-*/
     z= res1.at(index);
     a= res2.at(index);
     index ++;
@@ -649,7 +653,24 @@ QString clsWK6500P::gpibTrig()
     return QString::number(it1,'E',7) +","+QString::number(it2,'E',7);
 }
 
+void clsWK6500P::setGpibFastGpib(const QString &value)
+{
+    if(value == "ON")
+    {
+        this->isUpdate = false;
+        emit showMessage("FAST-GPIB ON");
+    }
+    else
+    {
+        this->isUpdate = true;
+        emit showMessage("");
+    }
+}
+
 void clsWK6500P::setLanRemote(bool value)
 {
+    if(value == false)
+        this->isUpdate = true;
+
     emit sgnSetLanRemote(value);
 }
