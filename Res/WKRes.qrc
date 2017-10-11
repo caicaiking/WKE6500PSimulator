@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>BiasOn.png</file>
+        <file>DataIn.txt</file>
     </qresource>
 </RCC>

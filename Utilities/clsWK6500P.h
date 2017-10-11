@@ -125,6 +125,9 @@ private:
     QString Speed;
 
     double z,a;
+    double it1,it2;
+    int index;
+    QList<double> res1,res2;
     bool isUpdate;
     void getParRes();
 };

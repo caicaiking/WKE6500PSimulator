@@ -4,6 +4,8 @@
 #include "doubleType.h"
 #include "clsWK6500P.h"
 #include "clsWKCommandProcess.h"
+#include <QTextStream>
+#include <QStringList>
 clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
 {
     item1 = "Z";
@@ -25,6 +27,21 @@ clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
     a=1;
 
     connect(sngWkCommandProcess::Instance(),SIGNAL(lanRemote(bool)),this,SLOT(setLanRemote(bool)));
+
+    QFile file(":/DataIn.txt");
+    if(!file.open(QIODevice::ReadOnly| QIODevice::Text))
+        return;
+    while(!file.atEnd())
+    {
+        QString txt = file.readLine();
+        if(!txt.isEmpty())
+        {
+            QList<QString> res= txt.split(",") ;
+            res1.append(res.at(0).toDouble());
+            res2.append(res.at(1).toDouble());
+        }
+    }
+    index =0;
 }
 
 QString clsWK6500P::getSWOption() const
@@ -593,7 +610,6 @@ void clsWK6500P::getParRes()
     clsComplexOp *op = new clsComplexOp(z,a,frequency,(equcct==tr("Series")? series: parallel));
     op->CalaculateParameters();
 
-    double it1,it2;
     it1 = op->getPar(item1);
     it2 = op->getPar(item2);
 
@@ -614,16 +630,23 @@ void clsWK6500P::getParRes()
 
 QString clsWK6500P::gpibTrig()
 {
-    if(z<=1E6)
+    /* if(z<=1E6)
         z=z*((qrand()%100)*1.0/1000.0+1);
     else
         z=z*(-(qrand()%100)*1.0/1000.0+1);
     a= a*((qrand()%10)*1.0/1000.0+1.0);
     if(a>=90.0)
         a=90.0-(a-90.0);
+*/
+    z= res1.at(index);
+    a= res2.at(index);
+    index ++;
+
+    index = index % (res1.length());
+
     getParRes();
 
-    return QString::number(z,'E',7) +","+QString::number(a,'E',7);
+    return QString::number(it1,'E',7) +","+QString::number(it2,'E',7);
 }
 
 void clsWK6500P::setLanRemote(bool value)

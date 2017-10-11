@@ -8,6 +8,10 @@ clsWKCommandProcess::clsWKCommandProcess(QObject *parent) : QObject(parent)
     //注册所有的函数，用其GPIB指令注册其Key
     queryFunction.insert("*IDN?",this->queryId);
     queryFunction.insert("*OPT2?",this->querySWOption);
+    queryFunction.insert("*BIASFITEXT?",this->queryBiasFitExit);
+    queryFunction.insert("*SYSBIAS?",this->querySysBias);
+    queryFunction.insert("*EXTBIASUNIT?",this->queryBiasUnit);
+
     queryFunction.insert("FUNC:1?",this->queryItem1);
     queryFunction.insert("FUNC:2?",this->queryItem2);
     queryFunction.insert("EQU-CCT?",this->queryEqucct);
@@ -40,6 +44,10 @@ void clsWKCommandProcess::setIsRemote(bool value) {
 
 void clsWKCommandProcess::setGpibCommand(QString str)
 {
+
+    qDebug()<< str;
+    if(str == " ")
+        return ;
     //根指令1st， 根指令2end
     QString strMode1st, strMode2end;
 
@@ -53,10 +61,10 @@ void clsWKCommandProcess::setGpibCommand(QString str)
 
         if(!tmpStr.isEmpty())
         {
-            if(str.contains("?")) //查询指令开始
+            if(tmpStr.contains("?")) //查询指令开始
             {
                 lastCmmdType =2;
-                QStringList modes= str.split(":",QString::SkipEmptyParts);
+                QStringList modes= tmpStr.split(":",QString::SkipEmptyParts);
                 if(modes.length()==1 && queryFunction.keys().contains(modes.at(0)))//通用的IEE488指令查询
                 {
 
@@ -214,6 +222,21 @@ void clsWKCommandProcess::queryBiasStatus()
 void clsWKCommandProcess::querySpeed()
 {
     writeToClient(sngWK6500::Instance()->getGpibSpeed());
+}
+
+void clsWKCommandProcess::queryBiasFitExit()
+{
+    writeToClient("1");
+}
+
+void clsWKCommandProcess::queryBiasUnit()
+{
+    writeToClient("4");
+}
+
+void clsWKCommandProcess::querySysBias()
+{
+   writeToClient("BIAS EXT");
 }
 
 void clsWKCommandProcess::setItem1(const QString &value)

@@ -40,6 +40,9 @@ public slots:
     void queryBiasType();
     void queryBiasStatus();
     void querySpeed();
+    void queryBiasFitExit();
+    void queryBiasUnit();
+    void querySysBias();
 
     void setItem1(const QString &value);
     void setItem2(const QString &value);
