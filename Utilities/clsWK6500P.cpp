@@ -36,7 +36,7 @@ clsWK6500P::clsWK6500P(QObject *parent) : QObject(parent)
         QString txt = file.readLine();
         if(!txt.isEmpty())
         {
-            QList<QString> res= txt.split(",") ;
+            QStringList res= txt.split("\t",QString::SkipEmptyParts) ;
             res1.append(res.at(0).toDouble());
             res2.append(res.at(1).toDouble());
         }
