@@ -466,7 +466,7 @@ Search</string>
        </font>
       </property>
       <property name="text">
-       <string>Fast</string>
+       <string>Maximum</string>
       </property>
      </widget>
     </widget>

@@ -659,8 +659,6 @@ QString clsWK6500P::gpibTrig()
     else
         Sleep(1000);
 
-
-
     return QString::number(it1,'E',7) +","+QString::number(it2,'E',7);
 }
 
