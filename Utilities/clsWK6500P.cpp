@@ -650,6 +650,17 @@ QString clsWK6500P::gpibTrig()
 
     getParRes();
 
+    if(this->Speed.toUpper() == tr("MAXIMUM"))
+        Sleep(30);
+    else if(this->Speed.toUpper() == tr("FAST"))
+        Sleep(80);
+    else if(this->Speed.toUpper() ==tr("MEDIUM"))
+        Sleep(200);
+    else
+        Sleep(1000);
+
+
+
     return QString::number(it1,'E',7) +","+QString::number(it2,'E',7);
 }
 

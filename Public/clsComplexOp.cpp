@@ -15,17 +15,17 @@ clsComplexOp::clsComplexOp(double inZ, double inA, double inFreq, Equcct inEqucc
     mW=2.0*PI*mFreq;
     CalaculateParameters();
 
-    myFunctions.insert("C",this->C);
-    myFunctions.insert("D",this->D);
-    myFunctions.insert("L",this->L);
-    myFunctions.insert("Q",this->Q);
-    myFunctions.insert("G",this->G);
-    myFunctions.insert("B",this->B);
-    myFunctions.insert("R",this->R);
-    myFunctions.insert("X",this->X);
-    myFunctions.insert("Z",this->Z);
-    myFunctions.insert("θ",this->A);
-    myFunctions.insert("Y",this->Y);
+    myFunctions.insert("C",&clsComplexOp::C);
+    myFunctions.insert("D",&clsComplexOp::D);
+    myFunctions.insert("L",&clsComplexOp::L);
+    myFunctions.insert("Q",&clsComplexOp::Q);
+    myFunctions.insert("G",&clsComplexOp::G);
+    myFunctions.insert("B",&clsComplexOp::B);
+    myFunctions.insert("R",&clsComplexOp::R);
+    myFunctions.insert("X",&clsComplexOp::X);
+    myFunctions.insert("Z",&clsComplexOp::Z);
+    myFunctions.insert("θ",&clsComplexOp::A);
+    myFunctions.insert("Y",&clsComplexOp::Y);
 }
 
 void clsComplexOp::CalaculateParameters()

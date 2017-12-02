@@ -6,36 +6,36 @@
 clsWKCommandProcess::clsWKCommandProcess(QObject *parent) : QObject(parent)
 {
     //注册所有的函数，用其GPIB指令注册其Key
-    queryFunction.insert("*IDN?",this->queryId);
-    queryFunction.insert("*OPT2?",this->querySWOption);
-    queryFunction.insert("*BIASFITEXT?",this->queryBiasFitExit);
-    queryFunction.insert("*SYSBIAS?",this->querySysBias);
-    queryFunction.insert("*EXTBIASUNIT?",this->queryBiasUnit);
+    queryFunction.insert("*IDN?",&clsWKCommandProcess::queryId);
+    queryFunction.insert("*OPT2?",&clsWKCommandProcess::querySWOption);
+    queryFunction.insert("*BIASFITEXT?",&clsWKCommandProcess::queryBiasFitExit);
+    queryFunction.insert("*SYSBIAS?",&clsWKCommandProcess::querySysBias);
+    queryFunction.insert("*EXTBIASUNIT?",&clsWKCommandProcess::queryBiasUnit);
 
-    queryFunction.insert("FUNC:1?",this->queryItem1);
-    queryFunction.insert("FUNC:2?",this->queryItem2);
-    queryFunction.insert("EQU-CCT?",this->queryEqucct);
-    queryFunction.insert("RANGE?",this->queryRange);
-    queryFunction.insert("FREQ?",this->queryFrequency);
-    queryFunction.insert("DRIVE?",this->queryLevelType);
-    queryFunction.insert("LEVEL?",this->queryLevelValue);
-    queryFunction.insert("BIAS?",this->queryBiasValue);
-    queryFunction.insert("BIAS-TYPE?",this->queryBiasType);
-    queryFunction.insert("BIAS-STAT?",this->queryBiasStatus);
-    queryFunction.insert("SPEED?",this->querySpeed);
+    queryFunction.insert("FUNC:1?",&clsWKCommandProcess::queryItem1);
+    queryFunction.insert("FUNC:2?",&clsWKCommandProcess::queryItem2);
+    queryFunction.insert("EQU-CCT?",&clsWKCommandProcess::queryEqucct);
+    queryFunction.insert("RANGE?",&clsWKCommandProcess::queryRange);
+    queryFunction.insert("FREQ?",&clsWKCommandProcess::queryFrequency);
+    queryFunction.insert("DRIVE?",&clsWKCommandProcess::queryLevelType);
+    queryFunction.insert("LEVEL?",&clsWKCommandProcess::queryLevelValue);
+    queryFunction.insert("BIAS?",&clsWKCommandProcess::queryBiasValue);
+    queryFunction.insert("BIAS-TYPE?",&clsWKCommandProcess::queryBiasType);
+    queryFunction.insert("BIAS-STAT?",&clsWKCommandProcess::queryBiasStatus);
+    queryFunction.insert("SPEED?",&clsWKCommandProcess::querySpeed);
 
-    setFunction.insert("FUNC:1",this->setItem1);
-    setFunction.insert("FUNC:2",this->setItem2);
-    setFunction.insert("EQU-CCT",this->setEqucct);
-    setFunction.insert("RANGE",this->setRange);
-    setFunction.insert("FREQ",this->setFrequency);
-    setFunction.insert("LEVEL",this->setLevelValue);
-    setFunction.insert("BIAS",this->setBiasValue);
-    setFunction.insert("BIAS-TYPE",this->setBiasType);
-    setFunction.insert("BIAS-STAT",this->setBiasStatus);
-    setFunction.insert("SPEED",this->setSpeed);
-    setFunction.insert("FAST-GPIB",this->setFastGpib);
-    setFunction.insert("TRIG",this->trig);
+    setFunction.insert("FUNC:1",&clsWKCommandProcess::setItem1);
+    setFunction.insert("FUNC:2",&clsWKCommandProcess::setItem2);
+    setFunction.insert("EQU-CCT",&clsWKCommandProcess::setEqucct);
+    setFunction.insert("RANGE",&clsWKCommandProcess::setRange);
+    setFunction.insert("FREQ",&clsWKCommandProcess::setFrequency);
+    setFunction.insert("LEVEL",&clsWKCommandProcess::setLevelValue);
+    setFunction.insert("BIAS",&clsWKCommandProcess::setBiasValue);
+    setFunction.insert("BIAS-TYPE",&clsWKCommandProcess::setBiasType);
+    setFunction.insert("BIAS-STAT",&clsWKCommandProcess::setBiasStatus);
+    setFunction.insert("SPEED",&clsWKCommandProcess::setSpeed);
+    setFunction.insert("FAST-GPIB",&clsWKCommandProcess::setFastGpib);
+    setFunction.insert("TRIG",&clsWKCommandProcess::trig);
     this->lastCmmdType =0;
 }
 
