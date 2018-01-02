@@ -4,7 +4,6 @@
 #include "clsWKCommandProcess.h"
 clsWKServer::clsWKServer(QObject *parent) :QTcpServer(parent)
 {
-
 }
 
 void clsWKServer::startServer()
@@ -12,7 +11,6 @@ void clsWKServer::startServer()
     if(!this->listen(QHostAddress::Any,2000))
     {
         qDebug()<< "Could not start server";
-
     }
     else
     {

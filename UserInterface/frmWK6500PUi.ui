@@ -816,14 +816,14 @@ Search</string>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>44</pointsize>
+      <pointsize>38</pointsize>
      </font>
     </property>
     <property name="text">
      <string>189.694kΩ</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="txtItem2Res">
@@ -838,14 +838,14 @@ Search</string>
     <property name="font">
      <font>
       <family>微软雅黑</family>
-      <pointsize>44</pointsize>
+      <pointsize>38</pointsize>
      </font>
     </property>
     <property name="text">
      <string>-89.8118 °</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QWidget" name="wgdBiasON" native="true">
